@@ -49,19 +49,12 @@ class Gallery extends Component {
                 </div>
             )
         })
-        
+
         return(
             <>
             <h2>Images taken on {date}: </h2>
             {cards}
             </>
-            /* {
-                this.state.images.map(img => {
-                    return(
-                        <div key={img.identifier}>{img.image}</div>
-                    )
-                })
-            } */
         )
     }
 }
