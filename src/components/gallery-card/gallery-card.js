@@ -1,11 +1,12 @@
 import React from "react";
 import { baseUrl } from '../../services/blueMarble'; 
 import { Card } from "react-bootstrap";
+import './gallery-card.scss';
 
 const GalleryCard = ({ img, year, month, day }) => {
 
     return(
-        <Card className="mt-4">
+        <Card className="card">
             <Card.Img variant="bottom" alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
             <Card.Body>
                 <Card.Title>{img.date}:</Card.Title>

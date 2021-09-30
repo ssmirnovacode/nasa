@@ -10,7 +10,6 @@ const App = () => {
         <>
             <div className="content">
                 <Header />
-                <div className="main">some main text</div>
                 <Gallery />
             </div>
             <Footer />

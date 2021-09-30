@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BlueMarble from '../../services/blueMarble'; 
 import { Container, Row, Col } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
+import './gallery.scss';
 
 const blueMarble = new BlueMarble();
 
@@ -52,7 +53,7 @@ class Gallery extends Component {
         })
 
         return(
-            <Container fluid>
+            <Container fluid className="gallery_wrapper">
                 <Row>
                     <Col>
                         <h2>Images taken on {date}: </h2>
