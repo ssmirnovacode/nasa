@@ -1,0 +1,10 @@
+@import '../../sass/variables';
+
+.content {
+    flex: 1 0 auto; 
+}
+
+.main {
+    background-color: $light;
+    color: $dark;
+}
