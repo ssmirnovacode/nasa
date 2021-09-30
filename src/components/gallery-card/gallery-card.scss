@@ -1,7 +1,10 @@
 @import '../../sass/variables';
 
 .card {
-    background-color: rgba(0, 0, 0, 0.445);
-    color: $light;
     margin: 1rem 0;
+    background-color: $dark;
+    &_body {
+        background-color: rgb(2, 4, 24);
+        color: $light;
+    }
 }

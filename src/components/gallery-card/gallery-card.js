@@ -3,12 +3,12 @@ import { baseUrl } from '../../services/blueMarble';
 import { Card } from "react-bootstrap";
 import './gallery-card.scss';
 
-const GalleryCard = ({ img, year, month, day }) => {
+const GalleryCard = ({ toggleModal, img, year, month, day }) => {
 
     return(
-        <Card className="card">
-            <Card.Img variant="bottom" alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
-            <Card.Body>
+        <Card className="card" onClick={toggleModal}>
+            <Card.Img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
+            <Card.Body className="card_body">
                 <Card.Title>{img.date}:</Card.Title>
                 <Card.Text>{img.caption}</Card.Text>
             </Card.Body>
@@ -18,8 +18,3 @@ const GalleryCard = ({ img, year, month, day }) => {
 };
 
 export default GalleryCard;
-
-/* <div key={img.identifier}>
-            <h4>{img.caption} on {img.date}:</h4>
-            <img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
-        </div> */

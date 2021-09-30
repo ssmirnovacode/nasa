@@ -16,7 +16,8 @@ class Gallery extends Component {
             date: '',
             year: null,
             month: null,
-            day: null
+            day: null,
+            modalShow: false
         }
     }
 
@@ -40,14 +41,20 @@ class Gallery extends Component {
         .catch(err => console.log(err))
     }
 
+    toggleModal = () => {
+        this.setState(state => ({
+            modalShow: !state.modalShow
+        }))
+    }
+
     render() {
 
         const { year, month, day, date } = this.state;
 
-        const cards = this.state.images.slice(0,10).map(img => {
+        const cards = this.state.images.map(img => {
             return(
                 <Col key={img.identifier} xs={12} sm={6} md={4} lg={3}>
-                    <GalleryCard img={img} year={year} month={month} day={day} />
+                    <GalleryCard toggleModal={this.toggleModal} img={img} year={year} month={month} day={day} />
                 </Col>
             )
         })
