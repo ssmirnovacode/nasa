@@ -2,7 +2,7 @@ export const baseApiUrl = 'https://epic.gsfc.nasa.gov/api';
 
 export const baseUrl = 'https://epic.gsfc.nasa.gov';
 
-export class NASAimages {
+class BlueMarble {
 
    /*  async getAllNaturals() {
         const res = await fetch(`${baseApiUrl}/natural`);
@@ -31,4 +31,6 @@ export class NASAimages {
         const json = await res.json();
         return json.slice(-1);
     }
-}
+};
+
+export default BlueMarble;

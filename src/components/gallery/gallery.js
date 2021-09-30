@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { NASAimages, baseUrl } from '../../api/nasa';
+import BlueMarble, { baseUrl } from '../../services/blueMarble'; 
 
-const nasa = new NASAimages();
+const blueMarble = new BlueMarble();
 
 class Gallery extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Gallery extends Component {
     }
 
     componentDidMount() {
-        nasa.getLastAvailableDate()
+        blueMarble.getLastAvailableDate()
         .then(date => {
             this.setState({
                 date: date[0],
@@ -28,17 +28,12 @@ class Gallery extends Component {
             })
         })
         .then(() =>{
-            nasa.getNaturalsByDate(this.state.date)
+            blueMarble.getNaturalsByDate(this.state.date)
             .then(res =>  this.setState({
                 images: res
             }))
             .catch(err => console.log(err))
         })
-
-        /* nasa.getNaturalsByDate('2016-10-31')
-            .then(res =>  this.setState({
-                images: res
-            })) */
         .catch(err => console.log(err))
     }
 
@@ -47,10 +42,6 @@ class Gallery extends Component {
         const { year, month, day, date } = this.state;
 
         const cards = this.state.images.slice(0,10).map(img => {
-            /* const year = img.date.slice(0,4);
-            const month = img.date.slice(5,7);
-            const day = img.date.slice(8,10); */
-
             return(
                 <div key={img.identifier}>
                     <h4>{img.caption} on {img.date}:</h4>
@@ -58,6 +49,7 @@ class Gallery extends Component {
                 </div>
             )
         })
+        
         return(
             <>
             <h2>Images taken on {date}: </h2>
