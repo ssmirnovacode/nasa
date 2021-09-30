@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import BlueMarble, { baseUrl } from '../../services/blueMarble'; 
+import BlueMarble from '../../services/blueMarble'; 
+import { Container, Row, Col } from 'react-bootstrap';
+import GalleryCard from '../gallery-card/gallery-card';
 
 const blueMarble = new BlueMarble();
 
@@ -43,18 +45,25 @@ class Gallery extends Component {
 
         const cards = this.state.images.slice(0,10).map(img => {
             return(
-                <div key={img.identifier}>
-                    <h4>{img.caption} on {img.date}:</h4>
-                    <img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
-                </div>
+                <Col key={img.identifier} xs={12} sm={6} md={4} lg={3}>
+                    <GalleryCard img={img} year={year} month={month} day={day} />
+                </Col>
             )
         })
 
         return(
-            <>
-            <h2>Images taken on {date}: </h2>
-            {cards}
-            </>
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <h2>Images taken on {date}: </h2>
+                        <Container fluid>
+                            <Row>
+                                {cards}
+                            </Row>
+                        </Container>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
