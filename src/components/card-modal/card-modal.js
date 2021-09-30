@@ -5,7 +5,7 @@ import './card-modal.scss'
 
 const CardModal = (props) => {
 
-  const { date, caption, identifier, image } = props.item;
+  const { date, caption, image } = props.item;
 
   const year = date.slice(0,4),
     month = date.slice(5,7),

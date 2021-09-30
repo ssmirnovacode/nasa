@@ -1,11 +1,12 @@
 import React from 'react';
 import './header.scss';
+import Navmenu from '../navmenu/navmenu';
 
 const Header = () => {
 
     return(
         <header className="header">
-            This is a header
+            <Navmenu />
         </header>
     )
 }

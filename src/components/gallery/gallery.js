@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import BlueMarble from '../../services/blueMarble'; 
 import { Container, Row, Col } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
-//import Portal from '../portal/portal';
 import './gallery.scss';
-import CardModal from '../card-modal/card-modal';
 
 const blueMarble = new BlueMarble();
 
