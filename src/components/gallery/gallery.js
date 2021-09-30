@@ -6,6 +6,7 @@ import './gallery.scss';
 import { setDate } from '../../redux/actions/dateActions';
 import { connect } from 'react-redux';
 import DateForm from '../date-form/date-form';
+import Error from '../error/error';
 
 const blueMarble = new BlueMarble();
 
@@ -14,8 +15,8 @@ class Gallery extends Component {
         super(props);
         this.state = {
             images: [],
-            loading: false,
-            error: false,
+            loading: true,
+            error: null,
         }
     }
 
@@ -34,6 +35,26 @@ class Gallery extends Component {
         .catch(err => console.log(err))
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.date !== prevProps.date) {
+            
+            blueMarble.getNaturalsByDate(this.props.date)
+                .then(res =>  {
+                    if (res.length > 0) {
+                        this.setState({
+                            images: res
+                        })
+                    }
+                    else {
+                        this.setState({
+                            error: 'No images available for selected day'
+                        })
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
     render() {
 
         const { date } = this.props;
@@ -49,6 +70,10 @@ class Gallery extends Component {
                 </Col>
             )
         })
+
+        /* if (this.state.error) {
+            return <Error text={this.state.error} />
+        } */
 
         return(
             <Container fluid className="gallery_wrapper">
@@ -67,7 +92,7 @@ class Gallery extends Component {
                         </Container>
                         <Container fluid>
                             <Row>
-                                {cards}
+                                {this.state.error ? <Error text={this.state.error} /> : cards}
                             </Row>
                         </Container>
                     </Col>

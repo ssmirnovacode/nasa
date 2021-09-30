@@ -22,6 +22,15 @@ class BlueMarble {
         return await res.json();
     }
 
+    async getAvailableDates() {
+        const res = await fetch(`${baseApiUrl}/natural/available`);
+
+        if (!res.ok) {
+            throw new Error('Could not fetch data')
+        }
+        await res.json();
+    }
+
     async getLastAvailableDate() {
         const res = await fetch(`${baseApiUrl}/natural/available`);
 
