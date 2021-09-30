@@ -17,17 +17,21 @@ const CardModal = (props) => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        onHide={props.onHide}
       >
-        <Modal.Header className="modal_content" closeButton onClick={props.onHide}>
+        <Modal.Header className="modal_content" closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             <h4>{date}</h4>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="modal_content">
-          <img className="modal_image" alt={caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/png/${image}.png`} />
+        <Modal.Body className="modal_content modal_content_body">
+          
+            <img className="modal_image" alt={caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/png/${image}.png`} />
+          
         </Modal.Body>
-        <Modal.Footer className="modal_content">
-          <Button onClick={props.onHide}>Close</Button>
+        <Modal.Footer className="modal_content modal_content_footer">
+          <a className="modal_content_link" href={`${baseUrl}/archive/natural/${year}/${month}/${day}/png/${image}.png`} target="blank">View on NASA web with zoom options</a>
+          <Button variant="outline-light" className="modal_btn" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
