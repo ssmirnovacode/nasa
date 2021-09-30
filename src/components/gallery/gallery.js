@@ -3,6 +3,8 @@ import BlueMarble from '../../services/blueMarble';
 import { Container, Row, Col } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
+import { setDate } from '../../redux/actions/dateActions';
+import { connect } from 'react-redux';
 
 const blueMarble = new BlueMarble();
 
@@ -13,26 +15,16 @@ class Gallery extends Component {
             images: [],
             loading: false,
             error: false,
-            date: '',
-            year: null,
-            month: null,
-            day: null,
-            //modalShow: false
         }
     }
 
     componentDidMount() {
         blueMarble.getLastAvailableDate()
-        .then(date => {
-            this.setState({
-                date: date[0],
-                year: date[0].slice(0,4),
-                month: date[0].slice(5,7),
-                day: date[0].slice(8,10)
-            })
+        .then(dates => {
+            this.props.setDate(dates[0]);
         })
         .then(() =>{
-            blueMarble.getNaturalsByDate(this.state.date)
+            blueMarble.getNaturalsByDate(this.props.date)
             .then(res =>  this.setState({
                 images: res
             }))
@@ -40,22 +32,19 @@ class Gallery extends Component {
         })
         .catch(err => console.log(err))
     }
-/* 
-    toggleModal = () => {
-        console.log(!this.state.modalShow);
-        this.setState(state => ({
-            modalShow: !state.modalShow
-        }))
-    } */
 
     render() {
 
-        const { year, month, day, date, /* modalShow */ } = this.state;
+        const { date } = this.props;
+
+        const year = date.slice(0,4),
+            month = date.slice(5,7),
+            day = date.slice(8,10)
 
         const cards = this.state.images.map(img => {
             return(
                 <Col key={img.identifier} xs={12} sm={6} md={4} lg={3}>
-                    <GalleryCard /* toggleModal={this.toggleModal} */ img={img} year={year} month={month} day={day} />
+                    <GalleryCard img={img} year={year} month={month} day={day} />
                 </Col>
             )
         })
@@ -70,13 +59,19 @@ class Gallery extends Component {
                                 {cards}
                             </Row>
                         </Container>
-                        {/* <CardModal show={modalShow} toggleModal={this.toggleModal} /> */}
                     </Col>
                     
                 </Row>
             </Container>
         )
     }
+};
+
+const mapStateToProps = state => ({
+    date: state.date
+});
+const mapDispatchToProps = {
+    setDate
 }
 
-export default Gallery;
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

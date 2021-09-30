@@ -14,7 +14,6 @@ class GalleryCard extends Component {
     }
 
     toggleModal = () => {
-        console.log(!this.state.modalShow);
         this.setState(state => ({
             modalShow: !state.modalShow
         }))
