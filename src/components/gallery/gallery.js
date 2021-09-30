@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import BlueMarble from '../../services/blueMarble'; 
 import { Container, Row, Col } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
+import Portal from '../portal/portal';
 import './gallery.scss';
+import CardModal from '../card-modal/card-modal';
 
 const blueMarble = new BlueMarble();
 
@@ -42,6 +44,7 @@ class Gallery extends Component {
     }
 
     toggleModal = () => {
+        console.log(!this.state.modalShow);
         this.setState(state => ({
             modalShow: !state.modalShow
         }))
@@ -49,7 +52,7 @@ class Gallery extends Component {
 
     render() {
 
-        const { year, month, day, date } = this.state;
+        const { year, month, day, date, modalShow } = this.state;
 
         const cards = this.state.images.map(img => {
             return(
@@ -70,6 +73,8 @@ class Gallery extends Component {
                             </Row>
                         </Container>
                     </Col>
+                    <CardModal show={modalShow} toggleModal={this.toggleModal} />
+                    
                 </Row>
             </Container>
         )
