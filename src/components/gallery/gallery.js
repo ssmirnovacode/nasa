@@ -5,6 +5,7 @@ import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
 import { setDate } from '../../redux/actions/dateActions';
 import { connect } from 'react-redux';
+import DateForm from '../date-form/date-form';
 
 const blueMarble = new BlueMarble();
 
@@ -53,7 +54,17 @@ class Gallery extends Component {
             <Container fluid className="gallery_wrapper">
                 <Row>
                     <Col>
-                        <h2>Images taken on {date}: </h2>
+                        <Container fluid className="gallery_header">
+                            <Row>
+                                <Col as={Col} xs={12} sm={6} lg={5}>
+                                    <h3>Images taken on {date}: </h3>
+                                </Col>
+                                <Col as={Col} xs={12} sm={6}>
+                                    <DateForm />
+                                </Col>
+                            </Row>
+                            
+                        </Container>
                         <Container fluid>
                             <Row>
                                 {cards}
