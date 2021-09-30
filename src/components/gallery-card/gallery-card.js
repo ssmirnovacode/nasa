@@ -1,20 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import { baseUrl } from '../../services/blueMarble'; 
 import { Card } from "react-bootstrap";
 import './gallery-card.scss';
+import CardModal from '../card-modal/card-modal';
 
-const GalleryCard = ({ toggleModal, img, year, month, day }) => {
+class GalleryCard extends Component {
 
-    return(
-        <Card className="card" onClick={toggleModal}>
-            <Card.Img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
-            <Card.Body className="card_body">
-                <Card.Title>{img.date}:</Card.Title>
-                <Card.Text>{img.caption}</Card.Text>
-            </Card.Body>
-            
-        </Card>
-    )
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalShow: false
+        }
+    }
+
+    toggleModal = () => {
+        console.log(!this.state.modalShow);
+        this.setState(state => ({
+            modalShow: !state.modalShow
+        }))
+    }
+
+    render() {
+
+        const { img, year, month, day } = this.props;
+    
+        return(
+            <>
+            <Card className="card" onClick={this.toggleModal}>
+                <Card.Img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
+                <Card.Body className="card_body">
+                    <Card.Title>{img.date}:</Card.Title>
+                    <Card.Text>{img.caption}</Card.Text>
+                </Card.Body>
+                
+            </Card>
+            <CardModal fullscreen show={this.state.modalShow} onHide={this.toggleModal} item={img} />
+            </>
+        )
+    }
+    
 };
 
 export default GalleryCard;
