@@ -1,0 +1,11 @@
+@import '../../sass/variables';
+
+.mars-card {
+    margin: 1rem 0;
+    background-color: $dark;
+    cursor: pointer;
+    &_body {
+        background-color: rgb(2, 4, 24);
+        color: $light;
+    }
+}
