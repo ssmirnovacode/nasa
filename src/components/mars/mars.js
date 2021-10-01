@@ -7,8 +7,31 @@ import Loading from '../loading/loading';
 import { setDate } from '../../redux/actions/dateActions';
 import { roverImagesLoaded, roverImagesError, roverImagesRequested } from '../../redux/actions/roverImagesActions';
 import { connect } from 'react-redux';
+import MarsRovers from '../../services/marsRovers';
+
+const marsRovers = new MarsRovers();
 
 class Mars extends Component {
+
+    componentDidMount() {
+        this.props.roverImagesRequested();
+        marsRovers.getRoverManifest('Curiosity')
+        .then(res => {
+            //console.log(res.photo_manifest.max_date);
+            this.props.setDate(res.photo_manifest.max_date);
+        })
+        .then(() => {
+            console.log(this.props.date);
+            marsRovers.getCuriosityPhotosByDate(this.props.date)
+            .then(res => {
+                console.log(res);
+                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: 'Rover didnt take photos on that day'})
+            })
+            .catch(err => this.props.roverImagesError(err))
+        })
+        
+        .catch(err => this.props.roverImagesError(err))
+    }
 
     render() {
 
@@ -20,8 +43,9 @@ class Mars extends Component {
 
         const cards = this.props.images.map(img => {
             return(
-                <Col key={img.identifier} xs={12} sm={6} md={4} lg={3}>
-                    <MarsCard img={img} year={year} month={month} day={day} />
+                <Col key={img.id} xs={12} sm={6} md={4} lg={3}>
+                    <div>{img.id}</div>
+                    {/* <MarsCard img={img} year={year} month={month} day={day} /> */}
                 </Col>
             )
         })
@@ -55,9 +79,9 @@ class Mars extends Component {
 
 const mapStateToProps = state => ({
     date: state.date,
-    images: state.rover.images,
-    loading: state.rover.loading,
-    error: state.rover.error
+    images: state.roverImages.images,
+    loading: state.roverImages.loading,
+    error: state.roverImages.error
 });
 
 const mapDispatchToProps = {
