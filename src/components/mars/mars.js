@@ -95,8 +95,7 @@ class Mars extends Component {
                         <Container fluid className="gallery_header">
                             <Row>
                                 <Col as={Col} xs={12} sm={12} lg={4}>
-                                    <h3>Mars images taken on {date} 
-                                    by <span className="rover-link" onClick={this.toggleDrawer} >
+                                    <h3>Mars images taken on {date} by <span className="rover-link" onClick={this.toggleDrawer} >
                                             {this.props.rover !== 'Select a rover' ? this.props.rover : 'Curiosity'}
                                         </span> rover: </h3>
                                 </Col>

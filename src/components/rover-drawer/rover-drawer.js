@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import { Offcanvas } from 'react-bootstrap';
+import { Offcanvas, CloseButton } from 'react-bootstrap';
+import './rover-drawer.scss';
 
 class RoverDrawer extends Component {
-
-    /* state = {
-        show: true
-    }
-
-    handleClose = () => {
-        this.setState({ show: false })
-    } */
 
     render() {
 
         return(
-            <Offcanvas show={this.props.show} onHide={this.props.onHide} {...this.props}>
-                <Offcanvas.Header closeButton>
+            <Offcanvas className="rover-drawer" show={this.props.show} onHide={this.props.onHide} {...this.props}>
+                <Offcanvas.Header>
+                <CloseButton variant="white" className="mars-modal-close"  onClick={this.props.onHide}/>
                 <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
