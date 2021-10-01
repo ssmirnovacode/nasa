@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import BlueMarble from '../../services/blueMarble'; 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
 import { setDate } from '../../redux/actions/dateActions';
 import { connect } from 'react-redux';
 import DateForm from '../date-form/date-form';
 import Error from '../error/error';
+import Loading from '../loading/loading';
 
 const blueMarble = new BlueMarble();
 
@@ -28,7 +29,8 @@ class Gallery extends Component {
         .then(() =>{
             blueMarble.getNaturalsByDate(this.props.date)
             .then(res =>  this.setState({
-                images: res
+                images: res,
+                loading: false
             }))
             .catch(err => console.log(err))
         })
@@ -42,7 +44,8 @@ class Gallery extends Component {
                 .then(res =>  {
                     if (res.length > 0) {
                         this.setState({
-                            images: res
+                            images: res,
+                            loading: false
                         })
                     }
                     else {
@@ -92,7 +95,9 @@ class Gallery extends Component {
                         </Container>
                         <Container fluid>
                             <Row>
-                                {this.state.error ? <Error text={this.state.error} /> : cards}
+                                {this.state.error ? <Error text={this.state.error} /> : 
+                                this.state.loading? <Loading /> 
+                                : cards}
                             </Row>
                         </Container>
                     </Col>
