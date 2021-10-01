@@ -10,10 +10,20 @@ import { connect } from 'react-redux';
 import MarsRovers from '../../services/marsRovers';
 import MarsCard from '../mars-card/mars-card';
 import RoverSelect from '../rover-select/rover-select';
+import RoverDrawer from '../rover-drawer/rover-drawer';
+import Button from '@restart/ui/esm/Button';
 
 const marsRovers = new MarsRovers();
 
 class Mars extends Component {
+
+    state = {
+        drawerShow: false
+    }
+
+    toggleDrawer = () => {
+        this.setState(state => ({ drawerShow: !state.drawerShow }))
+    }
 
     componentDidMount() {
         this.props.roverImagesRequested();
@@ -85,7 +95,10 @@ class Mars extends Component {
                         <Container fluid className="gallery_header">
                             <Row>
                                 <Col as={Col} xs={12} sm={12} lg={4}>
-                                    <h3>Mars images taken on {date} by {this.props.rover !== 'Select a rover' ? this.props.rover : 'Curiosity'} rover: </h3>
+                                    <h3>Mars images taken on {date} 
+                                    by <span className="rover-link" onClick={this.toggleDrawer} >
+                                            {this.props.rover !== 'Select a rover' ? this.props.rover : 'Curiosity'}
+                                        </span> rover: </h3>
                                 </Col>
                                 <Col as={Col} xs={12} sm={6} lg={4}>
                                     <DateForm />
@@ -103,6 +116,7 @@ class Mars extends Component {
                         </Container>
                     </Col>
                 </Row>
+                <RoverDrawer placement="top" show={this.state.drawerShow} onHide={this.toggleDrawer} />
             </Container>
         )
     }
