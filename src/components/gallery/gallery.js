@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BlueMarble from '../../services/blueMarble'; 
-import { Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
 import { setDate } from '../../redux/actions/dateActions';
@@ -9,18 +9,15 @@ import { connect } from 'react-redux';
 import DateForm from '../date-form/date-form';
 import Error from '../error/error';
 import Loading from '../loading/loading';
+import CardsCarousel from '../cards-carousel/cards-carousel';
 
 const blueMarble = new BlueMarble();
 
 class Gallery extends Component {
-    /* constructor(props) {
-        super(props);
-        this.state = {
-            images: [],
-            loading: true,
-            error: null,
-        }
-    } */
+
+    state = {
+        isCarousel: true
+    }
 
     componentDidMount() {
         this.props.imagesRequested();
@@ -86,8 +83,8 @@ class Gallery extends Component {
                         <Container fluid>
                             <Row>
                                 {this.props.error ? <Error text={this.props.error.message} /> : 
-                                this.props.loading? <Loading /> 
-                                : cards}
+                                this.props.loading? <Loading /> :
+                                this.state.isCarousel ? <CardsCarousel /> : cards}
                             </Row>
                         </Container>
                     </Col>

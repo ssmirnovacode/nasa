@@ -1,0 +1,23 @@
+@import '../../sass/variables';
+
+.cards-carousel {
+    
+    /* &_item {
+        display: flex;
+        align-items: center;
+    } */
+    &_image {
+        max-height: 90vh;
+        width: auto;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 675px) {
+    .cards-carousel {
+        &_image {
+            max-height: 90vh;
+            width: 100%
+        }
+    }
+}
