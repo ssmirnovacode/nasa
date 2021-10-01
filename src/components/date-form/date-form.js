@@ -10,6 +10,14 @@ class DateForm extends Component  {
         dateValue: this.props.date
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.date !== prevProps.date) {
+            this.setState({
+                dateValue: this.props.date 
+            })
+        }
+    }
+
     handleChange = (e) => {
         this.setState({
             dateValue: e.target.value

@@ -6,6 +6,7 @@
 .pnp.js
 api_key.txt
 /src/services/apiKey.js
+punchlist.txt
 
 # testing
 /coverage

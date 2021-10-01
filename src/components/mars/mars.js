@@ -9,6 +9,7 @@ import { roverImagesLoaded, roverImagesError, roverImagesRequested } from '../..
 import { connect } from 'react-redux';
 import MarsRovers from '../../services/marsRovers';
 import MarsCard from '../mars-card/mars-card';
+import RoverSelect from '../rover-select/rover-select';
 
 const marsRovers = new MarsRovers();
 
@@ -16,17 +17,17 @@ class Mars extends Component {
 
     componentDidMount() {
         this.props.roverImagesRequested();
-        marsRovers.getRoverManifest('Curiosity')
+        marsRovers.getRoverManifest(this.props.rover)
         .then(res => {
             console.log(res.photo_manifest)
             this.props.setDate(res.photo_manifest.max_date);
         })
         .then(() => {
             //console.log(this.props.date);
-            marsRovers.getRoverPhotosByDate('Curiosity', this.props.date)
+            marsRovers.getRoverPhotosByDate(this.props.rover, this.props.date)
             .then(res => {
                 //console.log(res);
-                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: 'Rover didnt take photos on that day'})
+                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover} rover didnt take any photos on ${this.props.date}`})
             })
             .catch(err => this.props.roverImagesError(err))
         })
@@ -35,13 +36,32 @@ class Mars extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.date !== prevProps.date) {
+        if (this.props.date !== prevProps.date && this.props.rover === prevProps.rover) {
             this.props.roverImagesRequested();
-            marsRovers.getRoverPhotosByDate('Curiosity', this.props.date)
+            marsRovers.getRoverPhotosByDate(this.props.rover, this.props.date)
             .then(res => {
                 //console.log(res);
-                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: 'Rover didnt take photos on that day'})
+                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover} rover didnt take any photos on ${this.props.date}`})
             })
+            .catch(err => this.props.roverImagesError(err))
+        }
+        if (this.props.rover !== prevProps.rover) {
+            this.props.roverImagesRequested();
+            marsRovers.getRoverManifest(this.props.rover)
+            .then(res => {
+                console.log(res.photo_manifest)
+                this.props.setDate(res.photo_manifest.max_date);
+            })
+            .then(() => {
+                //console.log(this.props.date);
+                marsRovers.getRoverPhotosByDate(this.props.rover, this.props.date)
+                .then(res => {
+                    //console.log(res);
+                    res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover} rover didnt take any photos on ${this.props.date}`})
+                })
+                .catch(err => this.props.roverImagesError(err))
+            })
+            
             .catch(err => this.props.roverImagesError(err))
         }
     }
@@ -64,11 +84,14 @@ class Mars extends Component {
                     <Col>
                         <Container fluid className="gallery_header">
                             <Row>
-                                <Col as={Col} xs={12} sm={6} lg={5}>
-                                    <h3>Mars images taken on {date}: </h3>
+                                <Col as={Col} xs={12} sm={12} lg={4}>
+                                    <h3>Mars images taken on {date} by {this.props.rover} rover: </h3>
                                 </Col>
-                                <Col as={Col} xs={12} sm={6}>
+                                <Col as={Col} xs={12} sm={6} lg={4}>
                                     <DateForm />
+                                </Col>
+                                <Col as={Col} xs={12} sm={6} lg={4}>
+                                    <RoverSelect />
                                 </Col>
                             </Row>
                         </Container>
@@ -89,7 +112,8 @@ const mapStateToProps = state => ({
     date: state.date,
     images: state.roverImages.images,
     loading: state.roverImages.loading,
-    error: state.roverImages.error
+    error: state.roverImages.error,
+    rover: state.rover
 });
 
 const mapDispatchToProps = {
