@@ -2,10 +2,7 @@
 
 .cards-carousel {
     
-    /* &_item {
-        display: flex;
-        align-items: center;
-    } */
+    
     &_image {
         max-height: 90vh;
         width: auto;
@@ -13,11 +10,17 @@
     }
 }
 
-@media (max-width: 675px) {
+@media (max-width: 660px) {
     .cards-carousel {
         &_image {
             max-height: 90vh;
             width: 100%
+        }
+        &_caption {
+            display: none;
+        }
+        &_title {
+            font-size: 1.2rem;
         }
     }
 }

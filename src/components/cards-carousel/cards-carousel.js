@@ -24,8 +24,8 @@ const CardsCarousel = props => {
                             alt={image.caption}
                             />
                             <Carousel.Caption>
-                            <h3>{image.date}</h3>
-                            <p>{image.caption}</p>
+                            <h3 className="cards-carousel_title">{image.date}</h3>
+                            <p className="cards-carousel_caption">{image.caption}</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                     )
