@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, CloseButton } from 'react-bootstrap';
+import { Modal, CloseButton } from 'react-bootstrap';
 import './mars-modal.scss'
 
 const MarsModal = (props) => {
@@ -14,6 +14,7 @@ const MarsModal = (props) => {
         centered
         onHide={props.onHide}
       >
+         <CloseButton variant="white" className="mars-modal-close"  onClick={props.onHide}/>
           <img className="modal_image" alt={`Taken by ${rover.name} on ${earth_date}`} src={img_src} />
         {/* <Modal.Header className="modal_content" closeButton>
           <Modal.Title id="contained-modal-title-vcenter">

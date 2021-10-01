@@ -18,20 +18,32 @@ class Mars extends Component {
         this.props.roverImagesRequested();
         marsRovers.getRoverManifest('Curiosity')
         .then(res => {
-            //console.log(res.photo_manifest.max_date);
+            console.log(res.photo_manifest)
             this.props.setDate(res.photo_manifest.max_date);
         })
         .then(() => {
-            console.log(this.props.date);
-            marsRovers.getCuriosityPhotosByDate(this.props.date)
+            //console.log(this.props.date);
+            marsRovers.getRoverPhotosByDate('Curiosity', this.props.date)
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: 'Rover didnt take photos on that day'})
             })
             .catch(err => this.props.roverImagesError(err))
         })
         
         .catch(err => this.props.roverImagesError(err))
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.date !== prevProps.date) {
+            this.props.roverImagesRequested();
+            marsRovers.getRoverPhotosByDate('Curiosity', this.props.date)
+            .then(res => {
+                //console.log(res);
+                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: 'Rover didnt take photos on that day'})
+            })
+            .catch(err => this.props.roverImagesError(err))
+        }
     }
 
     render() {
@@ -47,7 +59,7 @@ class Mars extends Component {
         })
 
         return(
-            <Container className="mars-gallery">
+            <Container fluid className="mars-gallery mars-gallery_wrapper">
                 <Row>
                     <Col>
                         <Container fluid className="gallery_header">

@@ -20,9 +20,9 @@ class MarsRovers {
         return date;
     }
 
-    async getCuriosityPhotosByDate(date) {
+    async getRoverPhotosByDate(roverName, date) {
 
-        const res = await fetch(`${baseApiUrl}/rovers/curiosity/photos?earth_date=${this.dateConverter(date)}&api_key=${apiKey}`);
+        const res = await fetch(`${baseApiUrl}/rovers/${roverName}/photos?earth_date=${this.dateConverter(date)}&api_key=${apiKey}`);
 
         if (!res.ok) {
             throw new Error('Could not fetch data')

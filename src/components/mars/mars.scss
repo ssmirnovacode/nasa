@@ -2,4 +2,10 @@
 
 .mars-gallery {
     color: $light;
+    &_wrapper {
+        padding: 1rem 2rem;
+        background-color: $blue;
+        color: $light;
+
+    }
 }
