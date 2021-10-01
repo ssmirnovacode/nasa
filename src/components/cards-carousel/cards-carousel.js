@@ -17,7 +17,7 @@ const CardsCarousel = props => {
             {
                 images.map(image => {
                     return(
-                        <Carousel.Item className="cards-carousel_item">
+                        <Carousel.Item key={image.identifier} className="cards-carousel_item">
                             <img
                             className="cards-carousel_image d-block"
                             src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${image.image}.jpg`}

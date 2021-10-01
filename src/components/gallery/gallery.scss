@@ -1,7 +1,18 @@
 @import '../../sass/variables';
 
-.gallery_wrapper {
-    padding: 1rem 2rem;
-    background-color: $blue;
-    color: $light;
+.gallery {
+    &_wrapper {
+        padding: 1rem 2rem;
+        background-color: $blue;
+        color: $light;
+
+    }
+    /* &_view-switch {
+        background-color: $blue;
+    } */
+}
+
+.form-check-input:checked {
+    background-color: $blue !important;
+    border-color: $light !important;
 }

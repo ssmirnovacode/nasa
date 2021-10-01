@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BlueMarble from '../../services/blueMarble'; 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
 import { setDate } from '../../redux/actions/dateActions';
@@ -16,7 +16,13 @@ const blueMarble = new BlueMarble();
 class Gallery extends Component {
 
     state = {
-        isCarousel: true
+        isCarousel: false
+    }
+
+    toggleView = () => {
+        this.setState(state => ({
+            isCarousel: !state.isCarousel
+        }))
     }
 
     componentDidMount() {
@@ -76,6 +82,13 @@ class Gallery extends Component {
                                 </Col>
                                 <Col as={Col} xs={12} sm={6}>
                                     <DateForm />
+                                </Col>
+                                <Col>
+                                    <Form.Check onChange={this.toggleView}
+                                        type="switch"
+                                        className="gallery_view-switch"
+                                        label={`Switch to ${ this.state.isCarousel ? 'gallery' : 'carousel'}`}
+                                    />
                                 </Col>
                             </Row>
                             
