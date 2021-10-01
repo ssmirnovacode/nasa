@@ -2,4 +2,8 @@
 
 .navmenu {
     font-size: 2rem;
+    &_link {
+        color: $light !important;
+        text-decoration: none;
+    }
 }
