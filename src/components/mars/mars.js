@@ -8,6 +8,7 @@ import { setDate } from '../../redux/actions/dateActions';
 import { roverImagesLoaded, roverImagesError, roverImagesRequested } from '../../redux/actions/roverImagesActions';
 import { connect } from 'react-redux';
 import MarsRovers from '../../services/marsRovers';
+import MarsCard from '../mars-card/mars-card';
 
 const marsRovers = new MarsRovers();
 
@@ -37,21 +38,16 @@ class Mars extends Component {
 
         const { date } = this.props;
 
-        const year = date.slice(0,4),
-            month = date.slice(5,7),
-            day = date.slice(8,10);
-
         const cards = this.props.images.map(img => {
             return(
-                <Col key={img.id} xs={12} sm={6} md={4} lg={3}>
-                    <div>{img.id}</div>
-                    {/* <MarsCard img={img} year={year} month={month} day={day} /> */}
+                <Col key={img.id} xs={12} sm={6} lg={4}>
+                    <MarsCard img={img} />
                 </Col>
             )
         })
 
         return(
-            <Container>
+            <Container className="mars-gallery">
                 <Row>
                     <Col>
                         <Container fluid className="gallery_header">
