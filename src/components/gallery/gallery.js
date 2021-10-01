@@ -85,7 +85,7 @@ class Gallery extends Component {
                         </Container>
                         <Container fluid>
                             <Row>
-                                {this.props.error ? <Error text={this.props.error} /> : 
+                                {this.props.error ? <Error text={this.props.error.message} /> : 
                                 this.props.loading? <Loading /> 
                                 : cards}
                             </Row>
