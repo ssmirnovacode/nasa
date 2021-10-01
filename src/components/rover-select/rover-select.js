@@ -7,14 +7,13 @@ class RoverSelect extends Component {
 
     handleChange = (e) => {
         this.props.setRover(e.target.value);
-        console.log(this.props.rover);
     }
 
     render() {
 
         return(
             <Form.Select aria-label="Default select example" onChange={this.handleChange}>
-                <option>Select a rover</option>
+                <option value="Curiosity">Select a rover</option>
                 <option value="Spirit">Spirit</option>
                 <option value="Opportunity">Opportunity</option>
                 <option value="Curiosity">Curiosity</option>

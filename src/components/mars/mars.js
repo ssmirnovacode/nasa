@@ -85,7 +85,7 @@ class Mars extends Component {
                         <Container fluid className="gallery_header">
                             <Row>
                                 <Col as={Col} xs={12} sm={12} lg={4}>
-                                    <h3>Mars images taken on {date} by {this.props.rover} rover: </h3>
+                                    <h3>Mars images taken on {date} by {this.props.rover !== 'Select a rover' ? this.props.rover : 'Curiosity'} rover: </h3>
                                 </Col>
                                 <Col as={Col} xs={12} sm={6} lg={4}>
                                     <DateForm />
