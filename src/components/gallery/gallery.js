@@ -4,6 +4,7 @@ import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
 import { setDate } from '../../redux/actions/dateActions';
+import { imagesLoaded, imagesError, imagesRequested } from '../../redux/actions/imagesActions';
 import { connect } from 'react-redux';
 import DateForm from '../date-form/date-form';
 import Error from '../error/error';
@@ -12,49 +13,42 @@ import Loading from '../loading/loading';
 const blueMarble = new BlueMarble();
 
 class Gallery extends Component {
-    constructor(props) {
+    /* constructor(props) {
         super(props);
         this.state = {
             images: [],
             loading: true,
             error: null,
         }
-    }
+    } */
 
     componentDidMount() {
+        this.props.imagesRequested();
         blueMarble.getLastAvailableDate()
         .then(dates => {
             this.props.setDate(dates[0]);
         })
         .then(() =>{
             blueMarble.getNaturalsByDate(this.props.date)
-            .then(res =>  this.setState({
-                images: res,
-                loading: false
-            }))
-            .catch(err => console.log(err))
+            .then(res => res ? this.props.imagesLoaded(res) : this.props.imagesError({ message: 'No images found'}))
+            .catch(err => this.props.imagesError(err))
         })
-        .catch(err => console.log(err))
+        .catch(err => this.props.imagesError(err))
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.date !== prevProps.date) {
-            
+            this.props.imagesRequested();
             blueMarble.getNaturalsByDate(this.props.date)
                 .then(res =>  {
                     if (res.length > 0) {
-                        this.setState({
-                            images: res,
-                            loading: false
-                        })
+                        this.props.imagesLoaded(res);
                     }
                     else {
-                        this.setState({
-                            error: 'No images available for selected day'
-                        })
+                        this.props.imagesError({ message: 'No images available for selected day'});
                     }
                 })
-                .catch(err => console.log(err))
+                .catch(err => this.props.imagesError(err))
         }
     }
 
@@ -66,17 +60,13 @@ class Gallery extends Component {
             month = date.slice(5,7),
             day = date.slice(8,10)
 
-        const cards = this.state.images.map(img => {
+        const cards = this.props.images.map(img => {
             return(
                 <Col key={img.identifier} xs={12} sm={6} md={4} lg={3}>
                     <GalleryCard img={img} year={year} month={month} day={day} />
                 </Col>
             )
         })
-
-        /* if (this.state.error) {
-            return <Error text={this.state.error} />
-        } */
 
         return(
             <Container fluid className="gallery_wrapper">
@@ -95,8 +85,8 @@ class Gallery extends Component {
                         </Container>
                         <Container fluid>
                             <Row>
-                                {this.state.error ? <Error text={this.state.error} /> : 
-                                this.state.loading? <Loading /> 
+                                {this.props.error ? <Error text={this.props.error} /> : 
+                                this.props.loading? <Loading /> 
                                 : cards}
                             </Row>
                         </Container>
@@ -109,10 +99,17 @@ class Gallery extends Component {
 };
 
 const mapStateToProps = state => ({
-    date: state.date
+    date: state.date,
+    images: state.images.images,
+    loading: state.images.loading,
+    error: state.images.error
 });
+
 const mapDispatchToProps = {
-    setDate
+    setDate,
+    imagesRequested,
+    imagesLoaded,
+    imagesError
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
