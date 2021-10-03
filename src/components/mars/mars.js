@@ -99,8 +99,8 @@ class Mars extends Component {
                             <Row>
                                 <Col as={Col} xs={12} sm={12} lg={4}>
                                     <h3>Mars images taken on {formatDate(date)} by <span className="rover-link" onClick={this.toggleDrawer} >
-                                            {this.props.rover.name !== 'Select a rover' ? this.props.rover.name : 'Curiosity'}
-                                        </span> rover: </h3>
+                                            {this.props.rover.name !== 'Select a rover' ? this.props.rover.name : 'Curiosity'}  rover
+                                        </span>: </h3>
                                 </Col>
                                 <Col as={Col} xs={12} sm={6} lg={4}>
                                     <DateForm />

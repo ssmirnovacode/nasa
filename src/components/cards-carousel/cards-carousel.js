@@ -3,6 +3,7 @@ import { Carousel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { baseUrl } from '../../services/blueMarble'; 
 import './cards-carousel.scss';
+import { formatDate } from '../../utils/converters';
 
 const CardsCarousel = props => {
 
@@ -24,7 +25,7 @@ const CardsCarousel = props => {
                             alt={image.caption}
                             />
                             <Carousel.Caption>
-                            <h3 className="cards-carousel_title">{image.date}</h3>
+                            <h3 className="cards-carousel_title">{`${formatDate(date.slice(0,10))} at ${date.slice(11)}`}</h3>
                             <p className="cards-carousel_caption">{image.caption}</p>
                             </Carousel.Caption>
                         </Carousel.Item>
