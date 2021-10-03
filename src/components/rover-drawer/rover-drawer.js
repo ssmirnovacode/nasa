@@ -1,10 +1,13 @@
 import React from 'react';
 import { Offcanvas, CloseButton } from 'react-bootstrap';
 import './rover-drawer.scss';
+import { formatDate } from '../../utils/converters';
 
 const RoverDrawer = props => {
 
     const { name, launched, landed, status, lastUpdate } = props.rover;
+
+    console.log(props.rover);
 
     return(
         <Offcanvas className="rover-drawer" show={props.show} onHide={props.onHide} {...props}>
@@ -14,10 +17,10 @@ const RoverDrawer = props => {
             </Offcanvas.Header>
             <Offcanvas.Body>
             <ul>
-                <li>Launched: <strong>{launched}</strong></li>
-                <li>Landed on Mars: <strong>{landed}</strong></li>
-                <li>Last recorded activity: <strong>{lastUpdate}</strong></li>
-                <li>Mission status: <strong>{status}</strong></li>
+                <li>Launched: <strong>{formatDate(launched)}</strong></li>
+                <li>Landed on Mars: <strong>{formatDate(landed)}</strong></li>
+                <li>Last recorded activity: <strong>{formatDate(lastUpdate)}</strong></li>
+                <li>Mission status: <b><em>{status}</em></b></li>
             </ul>
             </Offcanvas.Body>
         </Offcanvas>

@@ -10,6 +10,7 @@ import DateForm from '../date-form/date-form';
 import Error from '../error/error';
 import Loading from '../loading/loading';
 import CardsCarousel from '../cards-carousel/cards-carousel';
+import { formatDate } from '../../utils/converters';
 
 const blueMarble = new BlueMarble();
 
@@ -78,7 +79,7 @@ class Gallery extends Component {
                         <Container fluid className="gallery_header">
                             <Row>
                                 <Col as={Col} xs={12} sm={6} lg={5}>
-                                    <h3>Images taken on {date}: </h3>
+                                    <h3>Images taken on {formatDate(date)}: </h3>
                                 </Col>
                                 <Col as={Col} xs={12} sm={6}>
                                     <DateForm />

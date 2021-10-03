@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card } from "react-bootstrap";
 import './mars-card.scss';
 import MarsModal from '../mars-modal/mars-modal';
+import { formatDate } from '../../utils/converters';
 
 class MarsCard extends Component {
 
@@ -25,9 +26,9 @@ class MarsCard extends Component {
         return(
             <>
             <Card className="mars-card" onClick={this.toggleModal} >
-                <Card.Img alt={`Image taken by ${img.rover.name} on ${img.earth_date}`} src={img.img_src}/>
+                <Card.Img alt={`Image taken by ${img.rover.name} on ${formatDate(img.earth_date)}`} src={img.img_src}/>
                 <Card.Body className="mars-card_body">
-                    <Card.Title>Date: {img.earth_date}</Card.Title><hr/>
+                    <Card.Title>Date: {formatDate(img.earth_date)}</Card.Title><hr/>
                     <Card.Text>
                         <div>Rover: <strong>{img.rover.name}</strong></div>
                         <div>Camera: <strong>{img.camera.full_name}</strong></div>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Modal, Button } from 'react-bootstrap';
 import { baseUrl } from '../../services/blueMarble'; 
-import './card-modal.scss'
+import './card-modal.scss';
+import { formatDate } from '../../utils/converters';
 
 const CardModal = (props) => {
 
@@ -21,7 +22,7 @@ const CardModal = (props) => {
       >
         <Modal.Header className="modal_content" closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <h4>{date}</h4>
+            <h4>{`${formatDate(date.slice(0,10))} at ${date.slice(11)}`}:</h4>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal_content modal_content_body">

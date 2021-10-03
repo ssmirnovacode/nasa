@@ -1,9 +1,9 @@
 const roverReducer = (state = {
     name: 'Curiosity',
-    launched: null,
-    landed: null,
-    lastUpdate: null,
-    status: null
+    launched: '2011-11-26',
+    landed: '2012-08-06',
+    lastUpdate: '2021-10-01',
+    status: 'active'
 }, action) => {
     switch(action.type) {
         case 'SET_ROVER':

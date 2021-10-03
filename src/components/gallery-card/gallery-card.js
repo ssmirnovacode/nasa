@@ -3,6 +3,7 @@ import { baseUrl } from '../../services/blueMarble';
 import { Card } from "react-bootstrap";
 import './gallery-card.scss';
 import CardModal from '../card-modal/card-modal';
+import { formatDate } from '../../utils/converters';
 
 class GalleryCard extends Component {
 
@@ -28,7 +29,7 @@ class GalleryCard extends Component {
             <Card className="card" onClick={this.toggleModal}>
                 <Card.Img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
                 <Card.Body className="card_body">
-                    <Card.Title>{img.date}:</Card.Title>
+                    <Card.Title>{`${formatDate(img.date.slice(0,10))} at ${img.date.slice(11)}`}:</Card.Title>
                     <Card.Text>{img.caption}</Card.Text>
                 </Card.Body>
                 
