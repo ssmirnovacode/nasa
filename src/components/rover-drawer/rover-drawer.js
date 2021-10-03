@@ -7,12 +7,10 @@ const RoverDrawer = props => {
 
     const { name, launched, landed, status, lastUpdate } = props.rover;
 
-    console.log(props.rover);
-
     return(
         <Offcanvas className="rover-drawer" show={props.show} onHide={props.onHide} {...props}>
             <Offcanvas.Header>
-            <CloseButton variant="white" className="mars-modal-close"  onClick={props.onHide}/>
+                <CloseButton variant="white" className="mars-modal-close p-3" onClick={props.onHide}/>
             <Offcanvas.Title>{name} rover</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>

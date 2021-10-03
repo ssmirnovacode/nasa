@@ -7,7 +7,6 @@ const Footer = () => {
     return(
         <footer className="footer">
             <div className="footer_col navmenu">
-               {/*  <div className="footer headerlink"><Link to={`/`} >NASA app</Link></div> */}
                 <ul className="footer_nav">
                     <li><Link className="footer nav-link navmenu_link  py-1" to='/'>Home</Link></li>
                     <li><Link className="footer nav-link navmenu_link py-1" to='/earth'>Earth</Link></li>

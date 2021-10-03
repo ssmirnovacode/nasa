@@ -29,10 +29,10 @@ class MarsCard extends Component {
                 <Card.Img alt={`Image taken by ${img.rover.name} on ${formatDate(img.earth_date)}`} src={img.img_src}/>
                 <Card.Body className="mars-card_body">
                     <Card.Title>Date: {formatDate(img.earth_date)}</Card.Title><hr/>
-                    <Card.Text>
+                    <Card.Text as="div">
                         <div>Rover: <strong>{img.rover.name}</strong></div>
                         <div>Camera: <strong>{img.camera.full_name}</strong></div>
-                        <div>Marsian day from mission start: <strong>{img.sol}</strong></div>
+                        <div>Martian day from mission start: <strong>{img.sol}</strong></div>
                     </Card.Text>
                 </Card.Body>
             </Card>

@@ -30,7 +30,7 @@ class Mars extends Component {
         this.props.roverImagesRequested();
         marsRovers.getRoverManifest(this.props.rover.name)
         .then(res => {
-            console.log(res.photo_manifest);
+            //console.log(res.photo_manifest);
             this.props.setRoverData(res.photo_manifest);
             this.props.setDate(res.photo_manifest.max_date);
 
@@ -53,7 +53,7 @@ class Mars extends Component {
             this.props.roverImagesRequested();
             marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
-                console.log('got photos');
+                //console.log('got photos');
                 res.photos.length > 0 ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
             })
             .catch(err => this.props.roverImagesError(err))
@@ -62,7 +62,7 @@ class Mars extends Component {
             this.props.roverImagesRequested();
             marsRovers.getRoverManifest(this.props.rover.name)
             .then(res => {
-                console.log(res.photo_manifest);
+                //console.log(res.photo_manifest);
                 this.props.setRoverData(res.photo_manifest);
                 this.props.setDate(res.photo_manifest.max_date);
             })
@@ -70,7 +70,6 @@ class Mars extends Component {
                 //console.log(this.props.date);
                 marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
                 .then(res => {
-                    //console.log(res);
                     res.photos.length > 0 ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
                 })
                 .catch(err => this.props.roverImagesError(err))

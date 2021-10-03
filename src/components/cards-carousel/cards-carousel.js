@@ -13,7 +13,7 @@ const CardsCarousel = props => {
             day = date.slice(8,10);
 
     return(
-        <Carousel className="cards-carousel">
+        <Carousel className="cards-carousel mt-3">
             {
                 images.map(image => {
                     return(
