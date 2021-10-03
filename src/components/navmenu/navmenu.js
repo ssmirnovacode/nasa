@@ -9,7 +9,7 @@ class Navmenu extends Component {
         return(
             <Navbar variant="dark" className="navmenu" expand="sm">
                 <Container>
-                    <Navbar.Brand href="#home">NASA</Navbar.Brand>
+                    <Navbar.Brand>NASA App</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
