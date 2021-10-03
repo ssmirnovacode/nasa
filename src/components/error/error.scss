@@ -1,8 +1,15 @@
 @import '../../sass/variables';
 .error {
-    background: $blue url('https://c.tenor.com/6xd1kGTGV-EAAAAC/houston-we-have-a-problem-tom-hanks.gif') no-repeat center center;
+    background: $blue /* url('https://c.tenor.com/6xd1kGTGV-EAAAAC/houston-we-have-a-problem-tom-hanks.gif') no-repeat center center */;
     height:70vh;
     text-align: center;
     margin-bottom: 0;
     font-size: 1.5rem;
+    &_img {
+        margin: 2rem auto;
+        width: 100%;
+        @media (min-width: 768px) {
+            width: min-content;
+        }
+    }
 }
