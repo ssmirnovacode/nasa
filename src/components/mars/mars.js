@@ -6,12 +6,12 @@ import Error from '../error/error';
 import Loading from '../loading/loading';
 import { setDate } from '../../redux/actions/dateActions';
 import { roverImagesLoaded, roverImagesError, roverImagesRequested } from '../../redux/actions/roverImagesActions';
+import { setRoverData } from '../../redux/actions/roverActions';
 import { connect } from 'react-redux';
 import MarsRovers from '../../services/marsRovers';
 import MarsCard from '../mars-card/mars-card';
 import RoverSelect from '../rover-select/rover-select';
 import RoverDrawer from '../rover-drawer/rover-drawer';
-import Button from '@restart/ui/esm/Button';
 
 const marsRovers = new MarsRovers();
 
@@ -29,8 +29,10 @@ class Mars extends Component {
         this.props.roverImagesRequested();
         marsRovers.getRoverManifest(this.props.rover.name)
         .then(res => {
-            console.log(res.photo_manifest)
+            console.log(res.photo_manifest);
+            this.props.setRoverData(res.photo_manifest);
             this.props.setDate(res.photo_manifest.max_date);
+
         })
         .then(() => {
             //console.log(this.props.date);
@@ -59,7 +61,8 @@ class Mars extends Component {
             this.props.roverImagesRequested();
             marsRovers.getRoverManifest(this.props.rover.name)
             .then(res => {
-                console.log(res.photo_manifest)
+                console.log(res.photo_manifest);
+                this.props.setRoverData(res.photo_manifest);
                 this.props.setDate(res.photo_manifest.max_date);
             })
             .then(() => {
@@ -115,7 +118,7 @@ class Mars extends Component {
                         </Container>
                     </Col>
                 </Row>
-                <RoverDrawer placement="top" show={this.state.drawerShow} onHide={this.toggleDrawer} />
+                <RoverDrawer placement="top" rover={this.props.rover} show={this.state.drawerShow} onHide={this.toggleDrawer} />
             </Container>
         )
     }
@@ -133,7 +136,8 @@ const mapDispatchToProps = {
     setDate,
     roverImagesRequested,
     roverImagesLoaded,
-    roverImagesError
+    roverImagesError,
+    setRoverData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Mars);
