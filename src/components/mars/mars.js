@@ -27,17 +27,17 @@ class Mars extends Component {
 
     componentDidMount() {
         this.props.roverImagesRequested();
-        marsRovers.getRoverManifest(this.props.rover)
+        marsRovers.getRoverManifest(this.props.rover.name)
         .then(res => {
             console.log(res.photo_manifest)
             this.props.setDate(res.photo_manifest.max_date);
         })
         .then(() => {
             //console.log(this.props.date);
-            marsRovers.getRoverPhotosByDate(this.props.rover, this.props.date)
+            marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
                 //console.log(res);
-                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover} rover didnt take any photos on ${this.props.date}`})
+                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
             })
             .catch(err => this.props.roverImagesError(err))
         })
@@ -46,28 +46,28 @@ class Mars extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.date !== prevProps.date && this.props.rover === prevProps.rover) {
+        if (this.props.date !== prevProps.date && this.props.rover.name === prevProps.rover.name) {
             this.props.roverImagesRequested();
-            marsRovers.getRoverPhotosByDate(this.props.rover, this.props.date)
+            marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
-                //console.log(res);
-                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover} rover didnt take any photos on ${this.props.date}`})
+                console.log('got photos');
+                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
             })
             .catch(err => this.props.roverImagesError(err))
         }
-        if (this.props.rover !== prevProps.rover) {
+        if (this.props.rover.name !== prevProps.rover.name) {
             this.props.roverImagesRequested();
-            marsRovers.getRoverManifest(this.props.rover)
+            marsRovers.getRoverManifest(this.props.rover.name)
             .then(res => {
                 console.log(res.photo_manifest)
                 this.props.setDate(res.photo_manifest.max_date);
             })
             .then(() => {
                 //console.log(this.props.date);
-                marsRovers.getRoverPhotosByDate(this.props.rover, this.props.date)
+                marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
                 .then(res => {
                     //console.log(res);
-                    res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover} rover didnt take any photos on ${this.props.date}`})
+                    res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
                 })
                 .catch(err => this.props.roverImagesError(err))
             })
@@ -96,7 +96,7 @@ class Mars extends Component {
                             <Row>
                                 <Col as={Col} xs={12} sm={12} lg={4}>
                                     <h3>Mars images taken on {date} by <span className="rover-link" onClick={this.toggleDrawer} >
-                                            {this.props.rover !== 'Select a rover' ? this.props.rover : 'Curiosity'}
+                                            {this.props.rover.name !== 'Select a rover' ? this.props.rover.name : 'Curiosity'}
                                         </span> rover: </h3>
                                 </Col>
                                 <Col as={Col} xs={12} sm={6} lg={4}>
