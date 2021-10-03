@@ -40,7 +40,7 @@ class Mars extends Component {
             marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
                 //console.log(res);
-                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
+                res.photos.length > 0  ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
             })
             .catch(err => this.props.roverImagesError(err))
         })
@@ -54,7 +54,7 @@ class Mars extends Component {
             marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
                 console.log('got photos');
-                res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
+                res.photos.length > 0 ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
             })
             .catch(err => this.props.roverImagesError(err))
         }
@@ -71,7 +71,7 @@ class Mars extends Component {
                 marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
                 .then(res => {
                     //console.log(res);
-                    res.photos ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
+                    res.photos.length > 0 ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
                 })
                 .catch(err => this.props.roverImagesError(err))
             })

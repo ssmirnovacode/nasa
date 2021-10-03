@@ -7,7 +7,8 @@ const roverImagesReducer = (state = {
         case 'ROVER_IMAGES_REQUESTED':
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: false
         }
         case 'ROVER_IMAGES_LOADED':
             return {

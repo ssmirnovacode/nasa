@@ -7,7 +7,8 @@ const imagesReducer = (state = {
         case 'IMAGES_REQUESTED':
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: false
             }
         case 'IMAGES_LOADED':
                 return {
