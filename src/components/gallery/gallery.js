@@ -34,10 +34,10 @@ class Gallery extends Component {
         })
         .then(() =>{
             blueMarble.getNaturalsByDate(this.props.date)
-            .then(res => res ? this.props.imagesLoaded(res) : this.props.imagesError({ message: 'No images found'}))
+            .then(res => res ? this.props.imagesLoaded(res) : this.props.imagesError({ message: 'No images available for selected day'}))
             .catch(err => this.props.imagesError(err))
         })
-        .catch(err => this.props.imagesError(err))
+        .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
     }
 
     componentDidUpdate(prevProps) {
@@ -52,7 +52,7 @@ class Gallery extends Component {
                         this.props.imagesError({ message: 'No images available for selected day'});
                     }
                 })
-                .catch(err => this.props.imagesError(err))
+                .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
         }
     }
 

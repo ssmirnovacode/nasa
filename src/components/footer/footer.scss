@@ -5,14 +5,14 @@
     flex-shrink: 0; 
     background-color: $dark;
     display: flex;
-    padding-top: 2rem;
+    padding-top: 1rem;
     justify-content: space-around;
     gap: 0.7rem;
     margin-bottom: 0;
     color: $light;
-    @media (max-width:576px) {
+    /* @media (max-width:576px) {
         font-size: 0.7rem;
-    }
+    } */
     &.headerlink a {
         font-size: 1.2rem;
         font-weight: bold;
@@ -25,6 +25,7 @@
     } 
     &.nav-link a {
         text-align: left;
+       
         &:hover {
             text-decoration: underline;
             background-color: $dark;
@@ -34,21 +35,16 @@
 }
 .footer_col {
     & .navmenu {
-        /* @media (max-width:576px) {
-            display: none;
-        } */
         &_link {
           color: $light !important;
-            text-decoration: none;
+            //text-decoration: none;
+            &.underline {
+                text-decoration: underline;
+            }
             &:hover {
               text-decoration: underline;
           } 
         }
     }
     
-    & i {
-        color: $light;
-        font-size: 2rem;
-        margin-right: 1rem;
-    }
 }
