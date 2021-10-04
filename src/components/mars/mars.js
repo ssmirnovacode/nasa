@@ -26,7 +26,7 @@ class Mars extends Component {
         this.setState(state => ({ drawerShow: !state.drawerShow }))
     }
 
-    componentDidMount() {
+    getLastDateAndImages = () => {
         this.props.roverImagesRequested();
         marsRovers.getRoverManifest(this.props.rover.name)
         .then(res => {
@@ -48,6 +48,10 @@ class Mars extends Component {
         .catch(err => this.props.roverImagesError(err))
     }
 
+    componentDidMount() {
+        this.getLastDateAndImages();
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.date !== prevProps.date && this.props.rover.name === prevProps.rover.name) {
             this.props.roverImagesRequested();
@@ -59,23 +63,7 @@ class Mars extends Component {
             .catch(err => this.props.roverImagesError(err))
         }
         if (this.props.rover.name !== prevProps.rover.name) {
-            this.props.roverImagesRequested();
-            marsRovers.getRoverManifest(this.props.rover.name)
-            .then(res => {
-                //console.log(res.photo_manifest);
-                this.props.setRoverData(res.photo_manifest);
-                this.props.setDate(res.photo_manifest.max_date);
-            })
-            .then(() => {
-                //console.log(this.props.date);
-                marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
-                .then(res => {
-                    res.photos.length > 0 ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
-                })
-                .catch(err => this.props.roverImagesError(err))
-            })
-            
-            .catch(err => this.props.roverImagesError(err))
+            this.getLastDateAndImages();
         }
     }
 

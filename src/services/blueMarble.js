@@ -4,20 +4,11 @@ export const baseUrl = 'https://epic.gsfc.nasa.gov';
 
 class BlueMarble {
 
-   /*  async getAllNaturals() {
-        const res = await fetch(`${baseApiUrl}/natural`);
-
-        if (!res.ok) {
-            throw new Error('Could not fetch data')
-        }
-        return await res.json();
-    } */
-
     async getNaturalsByDate(date) {
         const res = await fetch(`${baseApiUrl}/natural/date/${date}`);
 
         if (!res.ok) {
-            throw new Error('Could not fetch data')
+            throw new Error('NASA images API is not available at the moment. Try again later.')
         }
         return await res.json();
     }
@@ -26,7 +17,7 @@ class BlueMarble {
         const res = await fetch(`${baseApiUrl}/natural/available`);
 
         if (!res.ok) {
-            throw new Error('Could not fetch data')
+            throw new Error('NASA images API is not available at the moment. Try again later.')
         }
         await res.json();
     }
@@ -35,7 +26,7 @@ class BlueMarble {
         const res = await fetch(`${baseApiUrl}/natural/available`);
 
         if (!res.ok) {
-            throw new Error('Could not fetch data')
+            throw new Error('NASA images API is not available at the moment. Try again later.')
         }
         const json = await res.json();
         return json.slice(-1);

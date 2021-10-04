@@ -26,33 +26,36 @@ class Gallery extends Component {
         }))
     }
 
+    loadImagesByDate = () => {
+        blueMarble.getNaturalsByDate(this.props.date)
+            .then(res =>  {
+                if (!res) {
+                    this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'})
+                }
+                else if (res.length > 0) {
+                    this.props.imagesLoaded(res);
+                }
+                else {
+                    this.props.imagesError({ message: 'No images available for selected day'});
+                }
+            })
+            .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
+    }
+
     componentDidMount() {
         this.props.imagesRequested();
         blueMarble.getLastAvailableDate()
         .then(dates => {
             this.props.setDate(dates[0]);
         })
-        .then(() =>{
-            blueMarble.getNaturalsByDate(this.props.date)
-            .then(res => res ? this.props.imagesLoaded(res) : this.props.imagesError({ message: 'No images available for selected day'}))
-            .catch(err => this.props.imagesError(err))
-        })
+        .then(() => this.loadImagesByDate())
         .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.date !== prevProps.date) {
             this.props.imagesRequested();
-            blueMarble.getNaturalsByDate(this.props.date)
-                .then(res =>  {
-                    if (res.length > 0) {
-                        this.props.imagesLoaded(res);
-                    }
-                    else {
-                        this.props.imagesError({ message: 'No images available for selected day'});
-                    }
-                })
-                .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
+            this.loadImagesByDate()
         }
     }
 
