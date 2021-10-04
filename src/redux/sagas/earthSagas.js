@@ -1,9 +1,8 @@
-import { takeEvery, call, put, takeLatest } from 'redux-saga/effects';
-import imagesActionTypes from '../../redux/actions/imagesActions';
-import dateActionTypes from '../../redux/actions/dateActions';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import dateActionTypes from '../actions/dateActions';
 import BlueMarble from '../../services/blueMarble'; 
 import { setDate } from '../actions/dateActions';
-import { imagesLoaded, imagesRequested, imagesError } from '../../redux/actions/imagesActions';
+import { imagesLoaded, imagesRequested, imagesError } from '../actions/imagesActions';
 
 const blueMarble = new BlueMarble();
 

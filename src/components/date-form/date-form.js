@@ -3,17 +3,23 @@ import './date-form.scss';
 import { Form, Button, InputGroup } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { setDate } from '../../redux//actions/dateActions';
+import { setRoverData } from '../../redux/actions/roverActions';
 
 class DateForm extends Component  {
 
     state = {
-        dateValue: this.props.date
+        dateValue: !this.props.variant ? this.props.date : this.props.rover.lastUpdate
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.date !== prevProps.date) {
+        if (!this.props.variant && this.props.date !== prevProps.date) {
             this.setState({
                 dateValue: this.props.date 
+            })
+        }
+        if (this.props.variant && this.props.rover.lastUpdate !== prevProps.rover.lastUpdate) {
+            this.setState({
+                dateValue: this.props.rover.lastUpdate 
             })
         }
     }
@@ -26,6 +32,10 @@ class DateForm extends Component  {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.props.variant ? this.props.setRoverData(data => ({
+            ...data,
+            lastUpdate: this.state.dateValue
+        })) :
         this.props.setDate(this.state.dateValue)
     }
 
@@ -45,10 +55,12 @@ class DateForm extends Component  {
 };
 
 const mapStateToProps = state => ({
-    date: state.date
+    date: state.date,
+    rover: state.rover
 });
 const mapDispatchToProps = {
-    setDate
+    setDate,
+    setRoverData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateForm);
