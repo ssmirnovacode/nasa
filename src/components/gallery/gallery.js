@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-//import BlueMarble from '../../services/blueMarble'; 
+import BlueMarble from '../../services/blueMarble'; 
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
-import { setDate } from '../../redux/actions/dateActions';
+import { setDate, dateRequested } from '../../redux/actions/dateActions';
 import { imagesLoaded, imagesError, imagesRequested } from '../../redux/actions/imagesActions';
 import { connect } from 'react-redux';
 import DateForm from '../date-form/date-form';
@@ -43,7 +43,8 @@ class Gallery extends Component {
     } */
 
     componentDidMount() {
-        this.props.imagesRequested();
+        this.props.dateRequested();
+        //this.props.imagesRequested();
         /* blueMarble.getLastAvailableDate()
         .then(dates => {
             this.props.setDate(dates[0]);
@@ -122,6 +123,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     setDate,
+    dateRequested,
     imagesRequested,
     imagesLoaded,
     imagesError
