@@ -1,22 +1,24 @@
+import imagesActionTypes from '../actions/imagesActions';
+
 const imagesReducer = (state = {
                                 images: [],
                                 loading: false,
                                 error: null
                             }, action) => {
     switch (action.type) {
-        case 'IMAGES_REQUESTED':
+        case imagesActionTypes.IMAGES_REQUESTED:
             return {
                 ...state,
                 loading: true,
                 error: false
             }
-        case 'IMAGES_LOADED':
+        case imagesActionTypes.IMAGES_LOADED:
                 return {
                     ...state,
                     images: action.payload,
                     loading: false
                 }
-        case 'IMAGES_ERROR':
+        case imagesActionTypes.IMAGES_ERROR:
             return {
                 ...state,
                 loading: false,

@@ -1,13 +1,21 @@
+const types = {
+    ROVER_IMAGES_REQUESTED: 'ROVER_IMAGES_REQUESTED',
+    ROVER_IMAGES_ERROR: 'ROVER_IMAGES_ERROR',
+    ROVER_IMAGES_LOADED: 'ROVER_IMAGES_LOADED'
+};
+
+export default types;
+
 export const roverImagesRequested = () => ({
-    type: 'ROVER_IMAGES_REQUESTED'
+    type: types.ROVER_IMAGES_REQUESTED
 });
 
 export const roverImagesError = (err) => ({
-    type: 'ROVER_IMAGES_ERROR',
+    type: types.ROVER_IMAGES_ERROR,
     payload: err
 });
 
 export const roverImagesLoaded = (arr) => ({
-    type: 'ROVER_IMAGES_LOADED',
+    type: types.ROVER_IMAGES_LOADED,
     payload: arr
 });

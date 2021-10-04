@@ -1,6 +1,8 @@
+import dateActionTypes from '../actions/dateActions';
+
 const dateReducer = (state='', action) => {
     switch(action.type) {
-        case 'SET_DATE': 
+        case dateActionTypes.SET_DATE: 
             return action.payload;
         default:
             return state;

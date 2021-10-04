@@ -1,13 +1,21 @@
+const types = {
+    IMAGES_REQUESTED: 'IMAGES_REQUESTED',
+    IMAGES_ERROR: 'IMAGES_ERROR',
+    IMAGES_LOADED: 'IMAGES_LOADED'
+};
+
+export default types;
+
 export const imagesRequested = () => ({
-    type: 'IMAGES_REQUESTED'
+    type: types.IMAGES_REQUESTED
 });
 
 export const imagesError = (err) => ({
-    type: 'IMAGES_ERROR',
+    type: types.IMAGES_ERROR,
     payload: err
 });
 
 export const imagesLoaded = (arr) => ({
-    type: 'IMAGES_LOADED',
+    type: types.IMAGES_LOADED,
     payload: arr
 });
