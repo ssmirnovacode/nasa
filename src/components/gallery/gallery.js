@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BlueMarble from '../../services/blueMarble'; 
+//import BlueMarble from '../../services/blueMarble'; 
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
@@ -12,7 +12,7 @@ import Loading from '../loading/loading';
 import CardsCarousel from '../cards-carousel/cards-carousel';
 import { formatDate } from '../../utils/converters';
 
-const blueMarble = new BlueMarble();
+//const blueMarble = new BlueMarble();
 
 class Gallery extends Component {
 
@@ -26,7 +26,7 @@ class Gallery extends Component {
         }))
     }
 
-    loadImagesByDate = () => {
+    /* loadImagesByDate = () => {
         blueMarble.getNaturalsByDate(this.props.date)
             .then(res =>  {
                 if (!res) {
@@ -40,22 +40,23 @@ class Gallery extends Component {
                 }
             })
             .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
-    }
+    } */
 
     componentDidMount() {
         this.props.imagesRequested();
-        blueMarble.getLastAvailableDate()
+        /* blueMarble.getLastAvailableDate()
         .then(dates => {
             this.props.setDate(dates[0]);
-        })
-        .then(() => this.loadImagesByDate())
-        .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
+        }) */
+        //this.loadImagesByDate()
+        /* .then(() => this.loadImagesByDate())
+        .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'})) */
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.date !== prevProps.date) {
             this.props.imagesRequested();
-            this.loadImagesByDate()
+            //this.loadImagesByDate()
         }
     }
 
