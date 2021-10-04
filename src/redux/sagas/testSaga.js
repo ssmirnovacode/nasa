@@ -1,6 +1,5 @@
 import { take } from 'redux-saga/effects';
 
-
 export function* testSaga() {
     while (true) {
         console.log('Starting saga'); // - 1; 4 (executes before dispatch and before the next dispatch)
