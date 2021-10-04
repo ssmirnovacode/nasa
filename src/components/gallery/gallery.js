@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BlueMarble from '../../services/blueMarble'; 
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
 import './gallery.scss';
@@ -11,8 +10,6 @@ import Error from '../error/error';
 import Loading from '../loading/loading';
 import CardsCarousel from '../cards-carousel/cards-carousel';
 import { formatDate } from '../../utils/converters';
-
-//const blueMarble = new BlueMarble();
 
 class Gallery extends Component {
 
@@ -26,43 +23,12 @@ class Gallery extends Component {
         }))
     }
 
-    /* loadImagesByDate = () => {
-        blueMarble.getNaturalsByDate(this.props.date)
-            .then(res =>  {
-                if (!res) {
-                    this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'})
-                }
-                else if (res.length > 0) {
-                    this.props.imagesLoaded(res);
-                }
-                else {
-                    this.props.imagesError({ message: 'No images available for selected day'});
-                }
-            })
-            .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'}))
-    } */
-
     componentDidMount() {
         this.props.dateRequested();
-        //this.props.imagesRequested();
-        /* blueMarble.getLastAvailableDate()
-        .then(dates => {
-            this.props.setDate(dates[0]);
-        }) */
-        //this.loadImagesByDate()
-        /* .then(() => this.loadImagesByDate())
-        .catch(err => this.props.imagesError({ message: 'NASA images API is not available at the moment. Try again later.'})) */
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.date !== prevProps.date) {
-            this.props.imagesRequested();
-            //this.loadImagesByDate()
-        }
     }
 
     render() {
-
+        console.log('rendered');
         const { date } = this.props;
 
         const year = date.slice(0,4),
