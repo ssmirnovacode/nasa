@@ -1,10 +1,11 @@
-import { delay } from 'redux-saga/effects';
+import { take } from 'redux-saga/effects';
 
 
 export function* testSaga() {
     while (true) {
-        yield delay(1000);
-        console.log('Test saga ran')
+        console.log('Starting saga'); // - 1; 4 (executes before dispatch and before the next dispatch)
+        yield take('IMAGES_REQUESTED'); // will execute when a specific action is dispatched - 2
+        console.log('Finishing saga execution'); // - 3 (will execute after the action is dispatched)
     }
 }
 
