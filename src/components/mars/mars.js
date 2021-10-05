@@ -54,7 +54,8 @@ class Mars extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.rover.lastUpdate !== prevProps.rover.lastUpdate && this.props.rover.name === prevProps.rover.name) {
+        if (this.props.rover.selectedDate !== prevProps.rover.selectedDate && this.props.rover.name === prevProps.rover.name) {
+            
             /* this.props.roverImagesRequested();
             marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.rover.lastUpdate)
             .then(res => {
@@ -64,6 +65,8 @@ class Mars extends Component {
             .catch(err => this.props.roverImagesError(err)) */
         }
         if (this.props.rover.name !== prevProps.rover.name) {
+            // works 
+
             //this.props.setRover(this.props.rover.name);
         }
     }

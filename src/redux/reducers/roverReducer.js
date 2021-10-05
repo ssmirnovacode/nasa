@@ -17,7 +17,7 @@ const roverReducer = (state = {
         case roverActionsTypes.SELECT_ROVER_DATE: {
             return {
                 ...state,
-                selectedDate: action.payload
+                selectedDate: action.payload.date
             }
         }
         case roverActionsTypes.SET_ROVER_DATA:
@@ -26,7 +26,8 @@ const roverReducer = (state = {
                 launched: action.payload.launch_date,
                 landed: action.payload.landing_date,
                 lastUpdate: action.payload.max_date,
-                status: action.payload.status
+                status: action.payload.status,
+                selectedDate: action.payload.max_date
             }
         default:
             return state

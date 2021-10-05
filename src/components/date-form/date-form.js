@@ -32,7 +32,7 @@ class DateForm extends Component  {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.variant ? this.props.selectRoverDate(this.state.dateValue) :
+        this.props.variant ? this.props.selectRoverDate({ date: this.state.dateValue, name: this.props.rover.name}) :
         this.props.setDate(this.state.dateValue)
     }
 

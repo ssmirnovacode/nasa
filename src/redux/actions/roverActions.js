@@ -21,7 +21,7 @@ export const requestRoverData = () => ({
     type: types.REQUEST_ROVER_DATA
 });
 
-export const selectRoverDate = (date) => ({
+export const selectRoverDate = (dateNameObj) => ({
     type: types.SELECT_ROVER_DATE,
-    payload: date
+    payload: dateNameObj
 });

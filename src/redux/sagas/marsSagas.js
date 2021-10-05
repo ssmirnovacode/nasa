@@ -48,7 +48,7 @@ export function* fetchRoverData(action) { // 2
 export function* fetchRoverImages(action) { // 4
     yield put(roverImagesRequested());
     console.log([action.payload.name, action.payload.max_date])
-    const res = yield call(marsRovers.getRoverPhotosByDate, action.payload.name, action.payload.max_date);
+    const res = yield call(marsRovers.getRoverPhotosByDate, action.payload.name, (action.payload.max_date || action.payload.date));
     if (!res) {
         yield put(roverImagesError({ message: 'NASA API is not available now. Try again later'}))
     }
