@@ -45,8 +45,6 @@ class DateForm extends Component  {
                     <Button variant="outline-light" type="submit" id="button-addon1">Set date</Button>
                 </InputGroup>
             </Form>
-            
-            
             )
     }
 };

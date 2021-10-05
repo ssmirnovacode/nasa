@@ -5,28 +5,15 @@ import { roverImagesError, roverImagesRequested, roverImagesLoaded } from '../ac
 
 const marsRovers = new MarsRovers();
 
-// Mounting:
-
-// 1 request a manifest by name (default)
-// 2. Set rover data and date
-// 3. request rover photos by name and date
-
-//Updating:
-// 1. If date changed - request rover photos by name and date
-// 2 if name changed - 1 request a manifest by name (default)
-                    // 2. Set rover data and date
-                    // 3. request rover photos by name and date
-
-
 // Listeners
 export function* roverNameListener() { // 1
     yield takeLatest(roverActionTypes.SET_ROVER, fetchRoverData);
-    console.log('SET_ROVER listener ran')
+    //console.log('SET_ROVER listener ran')
 }
 
 export function* roverDataListener() { // 3
     yield takeLatest(roverActionTypes.SET_ROVER_DATA, fetchRoverImages);
-    console.log('SET_ROVER_DATA listener ran')
+    //console.log('SET_ROVER_DATA listener ran')
 }
 
 export function* roverSelectedDateListener() {
@@ -38,7 +25,7 @@ export function* roverSelectedDateListener() {
 export function* fetchRoverData(action) { // 2
     yield put(roverImagesRequested()); // to set up loading state
     const data = yield call(marsRovers.getRoverManifest, action.payload)
-    console.log(data.photo_manifest);
+    //console.log(data.photo_manifest);
     if (!data) {
         yield put(roverImagesError({ message: 'NASA API is not available now. Try again later'}))
     }
@@ -47,7 +34,7 @@ export function* fetchRoverData(action) { // 2
 
 export function* fetchRoverImages(action) { // 4
     yield put(roverImagesRequested());
-    console.log([action.payload.name, action.payload.max_date])
+    //console.log([action.payload.name, action.payload.max_date])
     const res = yield call(marsRovers.getRoverPhotosByDate, action.payload.name, (action.payload.max_date || action.payload.date));
     if (!res) {
         yield put(roverImagesError({ message: 'NASA API is not available now. Try again later'}))

@@ -6,7 +6,7 @@ const roverReducer = (state = {
     landed: '2012-08-06',
     lastUpdate: '2021-10-01',
     status: 'active',
-    selectedDate: null
+    selectedDate: '2021-10-01'
 }, action) => {
     switch(action.type) {
         case roverActionsTypes.SET_ROVER:

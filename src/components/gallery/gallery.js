@@ -28,7 +28,7 @@ class Gallery extends Component {
     }
 
     render() {
-        console.log('rendered');
+        //console.log('rendered');
         const { date } = this.props;
 
         const year = date.slice(0,4),
