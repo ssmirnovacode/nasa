@@ -27,7 +27,7 @@ class Mars extends Component {
 
     render() {
 
-        //console.log('rendered');
+        console.log('Mars rendered');
 
         const { date } = this.props;
 

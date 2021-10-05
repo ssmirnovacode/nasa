@@ -23,14 +23,19 @@ export function* setDateListener() { // 3
 export function* fetchImagesByDateHandler(action) { // 4
     //console.log('fetchImagesByDate ran');
     yield put(imagesRequested()); // for loading effect
-    const res = yield call(blueMarble.getNaturalsByDate, action.payload);
-    if (!res) {
-        yield put(imagesError({ message: 'NASA API is not available. Try again later...'}))
+    if (action.payload) {
+        const res = yield call(blueMarble.getNaturalsByDate, action.payload);
+        if (!res) {
+            yield put(imagesError({ message: 'NASA API is not available. Try again later...'}))
+        }
+        else if (res.length < 1) {
+            yield put(imagesError({ message: 'No images found for selected day. Please choose another date'}))
+        }
+        else yield put(imagesLoaded(res));
     }
-    else if (res.length < 1) {
-        yield put(imagesError({ message: 'No images found for selected day. Please choose another date'}))
-    }
-    else yield put(imagesLoaded(res));
+    else console.log('fetchImagesByDateHandler: date is undefined');
+    
+    
 }
 
 export function* fetchLastDateHandler() { // 2
