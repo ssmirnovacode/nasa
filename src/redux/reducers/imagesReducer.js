@@ -3,7 +3,8 @@ import imagesActionTypes from '../actions/imagesActions';
 const imagesReducer = (state = {
                                 images: [],
                                 loading: false,
-                                error: null
+                                error: null,
+                                imageType: 'natural'
                             }, action) => {
     switch (action.type) {
         case imagesActionTypes.IMAGES_REQUESTED:
@@ -24,7 +25,11 @@ const imagesReducer = (state = {
                 loading: false,
                 error: action.payload
             }
-    
+        case imagesActionTypes.SET_IMAGE_TYPE:
+            return {
+                ...state,
+                imageType: action.payload
+            }
         default:
             return state;
     }   

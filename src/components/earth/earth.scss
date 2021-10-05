@@ -16,3 +16,11 @@
     background-color: $blue !important;
     border-color: $light !important;
 }
+
+.right_side {
+    display: block;
+    @media (min-width: 576px) {
+        display: flex;
+        justify-content: end;
+    }
+}

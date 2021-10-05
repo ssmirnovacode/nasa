@@ -2,12 +2,11 @@ import React, { Suspense } from 'react';
 import './app.scss';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-//import Gallery from '../gallery/gallery';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Loading from '../loading/loading';
 //import Mars from '../mars/mars';
 
-const Gallery = React.lazy(() => import('../gallery/gallery'));
+const Earth = React.lazy(() => import('../earth/earth'));
 const Mars = React.lazy(() => import('../mars/mars'));
 
 const App = () => {
@@ -17,8 +16,8 @@ const App = () => {
             <div className="content">
                 <Header />
                 <Suspense fallback={ <Loading /> }>
-                    <Route path='/' exact component={Gallery} />
-                    <Route path='/earth' component={Gallery} />
+                    <Route path='/' exact component={Earth} />
+                    <Route path='/earth' component={Earth} />
                     <Route path='/mars' component={Mars} />
                 </Suspense>
             </div>

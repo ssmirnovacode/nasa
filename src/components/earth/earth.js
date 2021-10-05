@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import GalleryCard from '../gallery-card/gallery-card';
-import './gallery.scss';
+import './earth.scss';
 import { setDate, dateRequested } from '../../redux/actions/dateActions';
-import { imagesLoaded, imagesError, imagesRequested } from '../../redux/actions/imagesActions';
+import { imagesLoaded, imagesError, imagesRequested, setImageType } from '../../redux/actions/imagesActions';
 import { connect } from 'react-redux';
 import DateForm from '../date-form/date-form';
 import Error from '../error/error';
 import Loading from '../loading/loading';
 import CardsCarousel from '../cards-carousel/cards-carousel';
 import { formatDate } from '../../utils/converters';
+import ImageTypeSelect from '../image-type-select/image-type-select';
 
-class Gallery extends Component {
+class Earth extends Component {
 
     state = {
         isCarousel: false
@@ -48,14 +49,17 @@ class Gallery extends Component {
                 <Row>
                     <Col>
                         <Container fluid className="gallery_header">
-                            <Row>
+                            <Row className="d-flex justify-content-between align-items-center g-3">
                                 <Col as={Col} xs={12} sm={6} lg={5}>
                                     <h3>Images taken on {formatDate(date)}: </h3>
                                 </Col>
-                                <Col as={Col} xs={12} sm={6}>
+                                <Col as={Col} xs={12} sm={6} className="right_side">
                                     <DateForm />
                                 </Col>
-                                <Col>
+                                <Col as={Col} xs={12} sm={6}>
+                                    <ImageTypeSelect />
+                                </Col>
+                                <Col as={Col} xs={12} sm={6}  className="right_side">
                                     <Form.Check onChange={this.toggleView}
                                         type="switch"
                                         className="gallery_view-switch"
@@ -84,7 +88,8 @@ const mapStateToProps = state => ({
     date: state.date,
     images: state.images.images,
     loading: state.images.loading,
-    error: state.images.error
+    error: state.images.error,
+    imageType: state.images.imageType
 });
 
 const mapDispatchToProps = {
@@ -92,7 +97,8 @@ const mapDispatchToProps = {
     dateRequested,
     imagesRequested,
     imagesLoaded,
-    imagesError
+    imagesError,
+    setImageType
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
+export default connect(mapStateToProps, mapDispatchToProps)(Earth);
