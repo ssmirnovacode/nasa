@@ -23,7 +23,7 @@ class BlueMarble {
         return json.slice(-1);
     }
 
-    async getNaturalsEnhancedByDate(date) {
+    async getEnhancedByDate(date) {
         const res = await fetch(`${baseApiUrl}/enhanced/date/${date}`);
 
         if (!res.ok) {
@@ -39,7 +39,7 @@ class BlueMarble {
             throw new Error('NASA images API is not available at the moment. Try again later.')
         }
         const json = await res.json();
-        return json.slice(-1);
+        return json.slice(0,1);
     }
     /* async getAvailableDates() {
         const res = await fetch(`${baseApiUrl}/natural/available`);

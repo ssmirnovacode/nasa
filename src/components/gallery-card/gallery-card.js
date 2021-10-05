@@ -22,12 +22,12 @@ class GalleryCard extends Component {
 
     render() {
 
-        const { img, year, month, day } = this.props;
+        const { img, year, month, day, imageType } = this.props;
     
         return(
             <>
             <Card className="card" onClick={this.toggleModal}>
-                <Card.Img alt={img.caption} src={`${baseUrl}/archive/natural/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
+                <Card.Img alt={img.caption} src={`${baseUrl}/archive/${imageType}/${year}/${month}/${day}/jpg/${img.image}.jpg`} />
                 <Card.Body className="card_body">
                     <Card.Title>{`${formatDate(img.date.slice(0,10))} at ${img.date.slice(11)}`}:</Card.Title>
                     <Card.Text>{img.caption}</Card.Text>

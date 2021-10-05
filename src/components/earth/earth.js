@@ -30,7 +30,7 @@ class Earth extends Component {
 
     render() {
         console.log('Earth rendered');
-        const { date } = this.props;
+        const { date, imageType } = this.props;
 
         const year = date.slice(0,4),
             month = date.slice(5,7),
@@ -39,7 +39,7 @@ class Earth extends Component {
         const cards = this.props.images.map(img => {
             return(
                 <Col key={img.identifier} xs={12} sm={6} md={4} lg={3}>
-                    <GalleryCard img={img} year={year} month={month} day={day} />
+                    <GalleryCard imageType={imageType} img={img} year={year} month={month} day={day} />
                 </Col>
             )
         })
