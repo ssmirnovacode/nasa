@@ -29,6 +29,10 @@ export function* roverDataListener() { // 3
     console.log('SET_ROVER_DATA listener ran')
 }
 
+export function* roverSelectedDateListener() {
+    yield takeLatest(roverActionTypes.SELECT_ROVER_DATE, fetchRoverImages) // only 1 arg instead of 2....
+}
+
 // Handlers
 
 export function* fetchRoverData(action) { // 2
