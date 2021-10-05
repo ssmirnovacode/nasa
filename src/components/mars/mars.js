@@ -6,7 +6,7 @@ import Error from '../error/error';
 import Loading from '../loading/loading';
 import { setDate } from '../../redux/actions/dateActions';
 import { roverImagesLoaded, roverImagesError, roverImagesRequested } from '../../redux/actions/roverImagesActions';
-import { setRoverData, setRover } from '../../redux/actions/roverActions';
+import { setRoverData } from '../../redux/actions/roverActions';
 import { connect } from 'react-redux';
 import MarsRovers from '../../services/marsRovers';
 import MarsCard from '../mars-card/mars-card';
@@ -28,17 +28,16 @@ class Mars extends Component {
 
     getLastDateAndImages = () => {
         this.props.roverImagesRequested();
-        this.props.setRover('Curiosity');
         marsRovers.getRoverManifest(this.props.rover.name)
         .then(res => {
             //console.log(res.photo_manifest);
             this.props.setRoverData(res.photo_manifest);
-            //this.props.setDate(res.photo_manifest.max_date);
+            this.props.setDate(res.photo_manifest.max_date);
 
         })
         .then(() => {
             //console.log(this.props.date);
-            marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.rover.lastUpdate)
+            marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
                 //console.log(res);
                 res.photos.length > 0  ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
@@ -50,27 +49,25 @@ class Mars extends Component {
     }
 
     componentDidMount() {
-        this.props.setRover('Curiosity');
+        this.getLastDateAndImages();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.rover.lastUpdate !== prevProps.rover.lastUpdate && this.props.rover.name === prevProps.rover.name) {
-            /* this.props.roverImagesRequested();
-            marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.rover.lastUpdate)
+        if (this.props.date !== prevProps.date && this.props.rover.name === prevProps.rover.name) {
+            this.props.roverImagesRequested();
+            marsRovers.getRoverPhotosByDate(this.props.rover.name, this.props.date)
             .then(res => {
                 //console.log('got photos');
                 res.photos.length > 0 ? this.props.roverImagesLoaded(res.photos) : this.props.roverImagesError({ message: `${this.props.rover.name} rover didnt take any photos on ${this.props.date}`})
             })
-            .catch(err => this.props.roverImagesError(err)) */
+            .catch(err => this.props.roverImagesError(err))
         }
         if (this.props.rover.name !== prevProps.rover.name) {
-            //this.props.setRover(this.props.rover.name);
+            this.getLastDateAndImages();
         }
     }
 
     render() {
-
-        console.log('rendered');
 
         const { date } = this.props;
 
@@ -94,7 +91,7 @@ class Mars extends Component {
                                         </span>: </h3>
                                 </Col>
                                 <Col as={Col} xs={12} sm={6} lg={4}>
-                                    <DateForm variant="rover" />
+                                    <DateForm />
                                 </Col>
                                 <Col as={Col} xs={12} sm={6} lg={4}>
                                     <RoverSelect />
@@ -128,8 +125,7 @@ const mapDispatchToProps = {
     roverImagesRequested,
     roverImagesLoaded,
     roverImagesError,
-    setRoverData,
-    setRover
+    setRoverData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Mars);
