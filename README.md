@@ -1,4 +1,4 @@
-nasa-app-ssmirnovacode.web.app
+https://nasa-app-ssmirnovacode.web.app
 
 # Tech stack
 
