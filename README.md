@@ -6,8 +6,3 @@ https://nasa-app-ssmirnovacode.web.app
 - React Bootstrap
 - Bootstrap 5
 
-
-## Features trained:
-- Modals (pending)
-- Navigation (pending)
-- Carousel (pending)
